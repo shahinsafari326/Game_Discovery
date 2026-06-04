@@ -3,7 +3,7 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 
 const GameGrid = () => {
-  const { games, error, isLoading } = useGames();
+  const { data, error, isLoading } = useGames();
   // Create an array of size 20 skeletons for loading state
   const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
@@ -14,7 +14,7 @@ const GameGrid = () => {
         {isLoading &&
           skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
         {!isLoading &&
-          games.map((game) => <GameCard key={game.id} game={game} />)}
+          data.map((game) => <GameCard key={game.id} game={game} />)}
       </div>
     </div>
   );

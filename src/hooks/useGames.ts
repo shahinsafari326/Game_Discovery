@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import apiClient from "../services/api-client";
-import React from "react";
+import useData from "./useData";
 
 export interface Platform {
     id: number;
@@ -16,32 +14,6 @@ export interface Game {
   metacritic: number;
 }
 
-interface FetchGamesResponse {
-  results: Game[];
-  count: number;
-}
-const useGames = () => {
-  const [games, setGames] = React.useState<Game[]>([]);
-  const [error, setError] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
-  useEffect(() => {
-    const controller = new AbortController();
-    setIsLoading(true);
-    apiClient
-      .get<FetchGamesResponse>("/games", { signal: controller.signal })
-      .then((response) => {
-        setGames(response.data.results);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        if (error.name !== "CanceledError") {
-          setError(error.message);
-          setIsLoading(false);
-        }
-      });
+const useGames = () => useData<Game>("/games");
 
-    return () => controller.abort();
-  }, []);
-  return { games, error , isLoading};
-};
 export default useGames;
