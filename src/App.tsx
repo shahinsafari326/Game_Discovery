@@ -1,4 +1,5 @@
 import logo from "./assets/logo.png";
+import GameGrid from "./components/GameGrid";
 import NavBar from "./components/NavBar";
 
 function App() {
@@ -12,10 +13,12 @@ function App() {
       {/* Content area */}
       <div className="grid grid-cols-[250px_1fr]">
         {/* Sidebar */}
-        <aside className="hidden md:block  p-4">Sidebar</aside>
+        <aside className="hidden md:block p-4">Sidebar</aside>
 
         {/* Main content */}
-        <main className="p-4">Main Content</main>
+        <main className="p-4">
+          <GameGrid />
+        </main>
       </div>
     </div>
   );

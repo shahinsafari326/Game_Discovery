@@ -11,8 +11,9 @@ function NavBar({ logoSrc }: NavbarProps) {
           alt="Game Discover Logo"
           className="h-10 w-10 object-contain"
         />
-
-        <span className="text-xl font-bold">Game Discover</span>
+        <span className=" bg-clip-text text-xl font-extrabold">
+          Game Discover
+        </span>{" "}
       </div>
     </nav>
   );
