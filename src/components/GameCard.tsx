@@ -1,4 +1,5 @@
 import type { Game } from "../hooks/useGames";
+import CriticScore from "./CriticScore";
 import PlatformIconList from "./PlatformIconList";
 
 interface GameCardsProps {
@@ -12,9 +13,12 @@ const GameCard = ({ game }: GameCardsProps) => {
 
       <div className="p-1">
         <h2 className="mb-1 text-md font-bold text-white">{game.name}</h2>
-        <PlatformIconList
-          platforms={game.parent_platforms.map((p) => p.platform)}
-        />
+        <div className="flex justify-between gap-5">
+          <PlatformIconList
+            platforms={game.parent_platforms.map((p) => p.platform)}
+          />
+          <CriticScore score={game.metacritic} />
+        </div>
       </div>
     </article>
   );
