@@ -2,9 +2,14 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 
-const GameGrid = () => {
-  const { data, error, isLoading } = useGames();
+interface GameGridProps {
+  genreId: number | null;
+}
+
+const GameGrid = ({ genreId }: GameGridProps) => {
+  const { data, error, isLoading } = useGames(genreId);
   // Create an array of size 20 skeletons for loading state
+
   const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);
   return (
     <div>

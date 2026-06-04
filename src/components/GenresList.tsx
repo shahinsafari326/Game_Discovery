@@ -1,7 +1,11 @@
 import useGenres from "../hooks/useGenres";
 import { Spinner } from "./Spinner";
 
-const GenresList = () => {
+interface GenreListProps {
+  onSelectGenre: (genreId: number) => void;
+}
+
+const GenresList = ({ onSelectGenre }: GenreListProps) => {
   const { data, isLoading } = useGenres();
   if (isLoading) return <Spinner />;
 
@@ -15,9 +19,13 @@ const GenresList = () => {
               alt={genre.name}
               className="h-10 w-10 rounded-xl object-contain"
             />
-            <span className=" bg-clip-text text-sm font-extrabold">
+
+            <button
+              onClick={() => onSelectGenre(genre.id)}
+              className="text-blue-600 hover:underline"
+            >
               {genre.name}
-            </span>
+            </button>
           </div>
         </li>
       ))}

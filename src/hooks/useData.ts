@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import apiClient from '../services/api-client';
+import type { AxiosRequestConfig } from 'axios';
 
 
 export interface FetchResponse<T> {
@@ -7,7 +8,7 @@ export interface FetchResponse<T> {
     count: number;
 }
 
-const useData = <T> (endpoint: string) => {
+const useData = <T> (endpoint: string, requestConfig?: AxiosRequestConfig, deps?: any[]) => {
   const [data, setData] = React.useState<T[]>([]);
   const [error, setError] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -15,7 +16,7 @@ const useData = <T> (endpoint: string) => {
     const controller = new AbortController();
     setIsLoading(true);
     apiClient
-      .get<FetchResponse<T>>(endpoint, { signal: controller.signal })
+      .get<FetchResponse<T>>(endpoint, { signal: controller.signal, ...requestConfig })
       .then((response) => {
         setData(response.data.results);
         setIsLoading(false);
@@ -28,7 +29,7 @@ const useData = <T> (endpoint: string) => {
       });
 
     return () => controller.abort();
-  }, []);
+  }, deps ? deps : []);
   return { data, error , isLoading};
 }
 
