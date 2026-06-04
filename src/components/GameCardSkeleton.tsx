@@ -1,3 +1,5 @@
+import { CARD_IMAGE_SIZE } from "./GameCard";
+
 /**
  * h-5 → height (like Chakra height="20px")
     w-32 → width (adjust as needed)
@@ -6,7 +8,11 @@
     animate-pulse → loading animation (key replacement for Chakra Skeleton)
  */
 const GameCardSkeleton = () => {
-  return <div className="h-48 w-full bg-gray-200 rounded animate-pulse"></div>;
+  return (
+    <div
+      className={` ${CARD_IMAGE_SIZE} bg-gray-200 rounded animate-pulse`}
+    ></div>
+  );
 };
 
 export default GameCardSkeleton;
