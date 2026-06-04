@@ -4,16 +4,16 @@ type NavbarProps = {
 
 function NavBar({ logoSrc }: NavbarProps) {
   return (
-    <nav className="flex h-16 items-center bg-zinc-900 px-4 text-white">
+    <nav className="flex h-21 items-center bg-zinc-900 px-1 text-white">
       <div className="flex items-center gap-3">
         <img
           src={logoSrc}
           alt="Game Discover Logo"
-          className="h-10 w-10 object-contain"
+          className="h-20 w-20 object-contain"
         />
         <span className=" bg-clip-text text-xl font-extrabold">
           Game Discover
-        </span>{" "}
+        </span>
       </div>
     </nav>
   );
