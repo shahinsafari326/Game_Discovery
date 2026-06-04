@@ -10,7 +10,7 @@ function App() {
         <NavBar logoSrc={logo} />
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-[150px_1fr]">
+      <div className="grid grid-cols-1 md:grid-cols-[190px_1fr]">
         <aside className="hidden md:block p-4">
           <GenresList />
         </aside>
