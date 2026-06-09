@@ -1,14 +1,14 @@
+import type { GameQuery } from "../App";
 import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 
 interface GameGridProps {
-  genreId: number | null;
-  platformId: number | null;
+  gameQuery: GameQuery;
 }
 
-const GameGrid = ({ genreId, platformId }: GameGridProps) => {
-  const { data, error, isLoading } = useGames(genreId, platformId);
+const GameGrid = ({ gameQuery }: GameGridProps) => {
+  const { data, error, isLoading } = useGames(gameQuery);
   // Create an array of size 20 skeletons for loading state
 
   const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);

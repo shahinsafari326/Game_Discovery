@@ -4,19 +4,24 @@ import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
-import type { Platform } from "./hooks/usePlatforms";
+
+export interface GameQuery {
+  genreId: number | null;
+  platformId: number | null;
+}
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
-  const [selectedPlatformId, setSelectedPlatformId] = useState<number | null>(
-    null,
-  );
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
+    genreId: null,
+    platformId: null,
+  });
+
   const handleSelectGenre = (genreId: number) => {
-    setSelectedGenre(genreId);
+    setGameQuery((prev) => ({ ...prev, genreId }));
   };
 
   const handleSelectPlatform = (platformId: number | null) => {
-    setSelectedPlatformId(platformId);
+    setGameQuery((prev) => ({ ...prev, platformId }));
   };
 
   return (
@@ -29,13 +34,13 @@ function App() {
         <aside className="hidden md:block mt-4 p-4">
           <GenresList
             onSelectGenre={handleSelectGenre}
-            selectedGenreId={selectedGenre}
+            selectedGenreId={gameQuery.genreId}
           />
         </aside>
 
         <main className="mt-4 p-4">
           <PlatformSelector onSelect={handleSelectPlatform} />
-          <GameGrid genreId={selectedGenre} platformId={selectedPlatformId} />
+          <GameGrid gameQuery={gameQuery} />
         </main>
       </div>
     </div>
