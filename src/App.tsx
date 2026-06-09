@@ -4,12 +4,19 @@ import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
+import type { Platform } from "./hooks/usePlatforms";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<number | null>(null);
-
+  const [selectedPlatformId, setSelectedPlatformId] = useState<number | null>(
+    null,
+  );
   const handleSelectGenre = (genreId: number) => {
     setSelectedGenre(genreId);
+  };
+
+  const handleSelectPlatform = (platformId: number | null) => {
+    setSelectedPlatformId(platformId);
   };
 
   return (
@@ -27,8 +34,8 @@ function App() {
         </aside>
 
         <main className="mt-4 p-4">
-          <PlatformSelector />
-          <GameGrid genreId={selectedGenre} />
+          <PlatformSelector onSelect={handleSelectPlatform} />
+          <GameGrid genreId={selectedGenre} platformId={selectedPlatformId} />
         </main>
       </div>
     </div>

@@ -4,10 +4,11 @@ import GameCardSkeleton from "./GameCardSkeleton";
 
 interface GameGridProps {
   genreId: number | null;
+  platformId: number | null;
 }
 
-const GameGrid = ({ genreId }: GameGridProps) => {
-  const { data, error, isLoading } = useGames(genreId);
+const GameGrid = ({ genreId, platformId }: GameGridProps) => {
+  const { data, error, isLoading } = useGames(genreId, platformId);
   // Create an array of size 20 skeletons for loading state
 
   const skeletons = Array.from({ length: 20 }, (_, i) => i + 1);
