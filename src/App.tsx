@@ -4,17 +4,16 @@ import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
+import SortSelector from "./components/SortSelector";
 
 export interface GameQuery {
   genreId: number | null;
   platformId: number | null;
+  sortBy: string | null;
 }
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({
-    genreId: null,
-    platformId: null,
-  });
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   const handleSelectGenre = (genreId: number) => {
     setGameQuery((prev) => ({ ...prev, genreId }));
@@ -39,7 +38,15 @@ function App() {
         </aside>
 
         <main className="mt-4 p-4">
-          <PlatformSelector onSelect={handleSelectPlatform} />
+          <div className="flex gap-3 mb-4">
+            <PlatformSelector onSelect={handleSelectPlatform} />
+            <SortSelector
+              onSelect={(sortBy) =>
+                setGameQuery((prev) => ({ ...prev, sortBy }))
+              }
+            />
+          </div>
+
           <GameGrid gameQuery={gameQuery} />
         </main>
       </div>
