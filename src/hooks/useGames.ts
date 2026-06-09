@@ -21,6 +21,7 @@ const useGames = (gameQuery: GameQuery) =>
         ...(gameQuery.genreId !== null && { genres: gameQuery.genreId }),
         ...(gameQuery.platformId !== null && { platforms: gameQuery.platformId }),
         ...(gameQuery.sortBy && { ordering: gameQuery.sortBy }),
+        ...(gameQuery.searchText && { search: gameQuery.searchText }),
       },
    }, [gameQuery]);
 

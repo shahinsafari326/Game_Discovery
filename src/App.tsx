@@ -10,6 +10,7 @@ export interface GameQuery {
   genreId: number | null;
   platformId: number | null;
   sortBy: string | null;
+  searchText: string | null;
 }
 
 function App() {
@@ -26,7 +27,12 @@ function App() {
   return (
     <div className="grid h-screen grid-rows-[80px_1fr]">
       <header className="p-4">
-        <NavBar logoSrc={logo} />
+        <NavBar
+          logoSrc={logo}
+          onSearch={(searchText) =>
+            setGameQuery((prev) => ({ ...prev, searchText }))
+          }
+        />
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-[190px_1fr]">
