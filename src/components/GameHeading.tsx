@@ -1,14 +1,8 @@
 import React from "react";
 import type { GameQuery } from "../App";
 
-interface GameHeadingProps {
-  gameQuery: GameQuery;
-}
-
-const GameHeading = ({ gameQuery }: GameHeadingProps) => {
-  const heading = `${gameQuery.platformId ? "Games" : "No platform"}`;
-
-  return <div>{heading}</div>;
+const GameHeading = () => {
+  return <h1 className="text-4xl font-bold mt-4 mb-4">Explore Games:</h1>;
 };
 
 export default GameHeading;

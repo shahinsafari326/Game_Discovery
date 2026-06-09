@@ -5,6 +5,7 @@ import GenresList from "./components/GenresList";
 import NavBar from "./components/NavBar";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
+import GameHeading from "./components/GameHeading";
 
 export interface GameQuery {
   genreId: number | null;
@@ -44,6 +45,8 @@ function App() {
         </aside>
 
         <main className="mt-4 p-4">
+          <GameHeading />
+
           <div className="flex gap-3 mb-4">
             <PlatformSelector onSelect={handleSelectPlatform} />
             <SortSelector
