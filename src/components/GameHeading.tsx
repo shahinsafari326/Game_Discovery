@@ -1,6 +1,3 @@
-import React from "react";
-import type { GameQuery } from "../App";
-
 const GameHeading = () => {
   return <h1 className="text-4xl font-bold mt-4 mb-4">Explore Games:</h1>;
 };

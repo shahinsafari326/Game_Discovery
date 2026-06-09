@@ -1,4 +1,4 @@
-import useGenres, { type Genre } from "../hooks/useGenres";
+import useGenres from "../hooks/useGenres";
 import { Spinner } from "./Spinner";
 
 interface GenreListProps {
