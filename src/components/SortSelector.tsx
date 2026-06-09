@@ -1,5 +1,3 @@
-import React from "react";
-
 interface SortSelectorProps {
   onSelect: (sortBy: string | null) => void;
 }
