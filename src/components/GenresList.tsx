@@ -1,3 +1,4 @@
+import useGenres from "../hooks/useGenre";
 import { Spinner } from "./Spinner";
 
 interface GenreListProps {
