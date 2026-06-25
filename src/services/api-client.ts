@@ -1,4 +1,10 @@
-import axios from "axios";
+import axios, { type AxiosRequestConfig } from "axios";
+
+
+export interface FetchResponse<T> {
+    results: T[];
+    count: number;
+}
 
 const apiClient = axios.create({
     baseURL: '/api',
@@ -7,4 +13,8 @@ const apiClient = axios.create({
     },
 });
 
+export const fetchData = <T> (endpoint: string, requestConfig?: AxiosRequestConfig): Promise<T[]>  => 
+          apiClient
+            .get<FetchResponse<T>>(endpoint, { ...requestConfig }) // <T> will be converted to T[] as in the FetchResponse interface
+            .then((response) => response.data.results)
 export default apiClient;
