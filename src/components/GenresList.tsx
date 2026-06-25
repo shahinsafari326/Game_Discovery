@@ -9,10 +9,11 @@ interface GenreListProps {
 const GenresList = ({ onSelectGenre, selectedGenreId }: GenreListProps) => {
   const { data, isLoading } = useGenres();
   if (isLoading) return <Spinner />;
+  const genres = data?.results;
 
   return (
     <ul className="space-y-1">
-      {data?.map((genre) => (
+      {genres?.map((genre) => (
         <li key={genre.id}>
           <div className="flex items-center gap-2 ">
             <img

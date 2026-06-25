@@ -5,7 +5,8 @@ interface PlatformSelectorProps {
 }
 
 const PlatformSelector = ({ onSelect }: PlatformSelectorProps) => {
-  const { data: platforms, error } = usePlatforms();
+  const { data, error } = usePlatforms();
+  const platforms = data?.results;
   if (error) return null;
 
   return (

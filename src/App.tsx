@@ -15,7 +15,12 @@ export interface GameQuery {
 }
 
 function App() {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({
+    genreId: null,
+    platformId: null,
+    sortBy: null,
+    searchText: null,
+  });
 
   const handleSelectGenre = (genreId: number) => {
     setGameQuery((prev) => ({ ...prev, genreId }));
