@@ -3,7 +3,7 @@ import type { GameQuery } from "../App";
 import APIClient from "../services/api-client";
 import type { Platform } from "./usePlatforms";
 
-const apiClient = new APIClient<Game> ("/games");
+const apiClient = new APIClient ("/games");
 
 
 export interface Game {
