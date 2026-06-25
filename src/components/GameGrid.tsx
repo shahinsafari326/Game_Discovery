@@ -3,6 +3,7 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Spinner } from "./Spinner";
 
 interface GameGridProps {
   gameQuery: GameQuery;
@@ -22,7 +23,7 @@ const GameGrid = ({ gameQuery }: GameGridProps) => {
       dataLength={games.length}
       next={fetchNextPage}
       hasMore={hasNextPage}
-      loader={<p>Loading...</p>}
+      loader={<Spinner></Spinner>}
       endMessage={<p style={{ textAlign: "center" }}>All items loaded.</p>}
     >
       <div>

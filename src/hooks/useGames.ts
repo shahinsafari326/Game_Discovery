@@ -3,6 +3,7 @@ import type { GameQuery } from "../App";
 import APIClient from "../services/api-client";
 import type { Platform } from "./usePlatforms";
 import type { FetchResponse } from "../services/api-client";
+import ms from "ms";
 
 const apiClient = new APIClient ("/games");
 
@@ -28,7 +29,7 @@ const useGames = (gameQuery: GameQuery) => useInfiniteQuery<FetchResponse<Game>,
         
       },
   } ),
-  staleTime:50000,
+  staleTime:ms('2h') ,
   refetchOnWindowFocus: false,
   initialPageParam: 1,
 
