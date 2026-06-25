@@ -6,15 +6,23 @@ export interface FetchResponse<T> {
     count: number;
 }
 
-const apiClient = axios.create({
+const axiosInstance = axios.create({
     baseURL: '/api',
     params: {
         key: import.meta.env.VITE_RAWG_API_KEY,
     },
 });
 
-export const fetchData = <T> (endpoint: string, requestConfig?: AxiosRequestConfig): Promise<T[]>  => 
-          apiClient
-            .get<FetchResponse<T>>(endpoint, { ...requestConfig }) // <T> will be converted to T[] as in the FetchResponse interface
+class APIClient<T> {
+    endpoint: string;
+    constructor(endpoint: string) {
+        this.endpoint=endpoint;
+    }
+
+    getAll = <T> (requestConfig?: AxiosRequestConfig): Promise<T[]>  => 
+          axiosInstance
+            .get<FetchResponse<T>>(this.endpoint, { ...requestConfig }) // <T> will be converted to T[] as in the FetchResponse interface
             .then((response) => response.data.results)
-export default apiClient;
+}
+
+export default APIClient;
