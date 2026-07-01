@@ -1,9 +1,9 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import type { GameQuery } from "../App";
 import APIClient from "../services/api-client";
 import type { Platform } from "./usePlatforms";
 import type { FetchResponse } from "../services/api-client";
 import ms from "ms";
+import useGameQueryStore from "../contexts/useGameQueryStore";
 
 const apiClient = new APIClient ("/games");
 
@@ -17,28 +17,31 @@ export interface Game {
 }
 
 
-const useGames = (gameQuery: GameQuery) => useInfiniteQuery<FetchResponse<Game>, Error>({
-  queryKey: ["games", gameQuery],
-  queryFn: ({pageParam}) => apiClient.getAll( {
-    params: {
-        page:pageParam,
-        ...(gameQuery.genreId !== null && { genres: gameQuery.genreId }),
-        ...(gameQuery.platformId !== null && { parent_platforms: gameQuery.platformId }),
-        ...(gameQuery.sortBy && { ordering: gameQuery.sortBy }),
-        ...(gameQuery.searchText && { search: gameQuery.searchText }),
-        
-      },
-  } ),
-  staleTime:ms('2h') ,
-  refetchOnWindowFocus: false,
-  initialPageParam: 1,
+const useGames = () => {
+  const {gameQuery} = useGameQueryStore();
+  return useInfiniteQuery<FetchResponse<Game>, Error>({
+    queryKey: ["games", gameQuery],
+    queryFn: ({pageParam}) => apiClient.getAll( {
+      params: {
+          page:pageParam,
+          ...(gameQuery.genreId !== null && { genres: gameQuery.genreId }),
+          ...(gameQuery.platformId !== null && { parent_platforms: gameQuery.platformId }),
+          ...(gameQuery.sortBy && { ordering: gameQuery.sortBy }),
+          ...(gameQuery.searchText && { search: gameQuery.searchText }),
+          
+        },
+    } ),
+    staleTime:ms('2h') ,
+    refetchOnWindowFocus: false,
+    initialPageParam: 1,
 
-  getNextPageParam: (lastPage, allPages) => {
+    getNextPageParam: (lastPage, allPages) => {
 
-      return lastPage.next ? allPages.length + 1: undefined;
-  },
+        return lastPage.next ? allPages.length + 1: undefined;
+    },
 
-})
+  })
+} 
 
 
 export default useGames;

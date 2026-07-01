@@ -1,10 +1,9 @@
+import useGameQueryStore from "../contexts/useGameQueryStore";
 import usePlatforms from "../hooks/usePlatforms";
 
-interface PlatformSelectorProps {
-  onSelect: (platformId: number | null) => void;
-}
+const PlatformSelector = () => {
+  const setPlatformId = useGameQueryStore((s) => s.setPlatformId);
 
-const PlatformSelector = ({ onSelect }: PlatformSelectorProps) => {
   const { data, error } = usePlatforms();
   const platforms = data?.results;
   if (error) return null;
@@ -13,7 +12,7 @@ const PlatformSelector = ({ onSelect }: PlatformSelectorProps) => {
     <select
       className="rounded-md border px-3 py-2 mb-4"
       onChange={(e) =>
-        onSelect(e.target.value === "all" ? null : Number(e.target.value))
+        setPlatformId(e.target.value === "all" ? null : Number(e.target.value))
       }
     >
       <option value="all">Platforms</option>

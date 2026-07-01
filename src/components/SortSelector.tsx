@@ -1,8 +1,8 @@
-interface SortSelectorProps {
-  onSelect: (sortBy: string | null) => void;
-}
+import useGameQueryStore from "../contexts/useGameQueryStore";
 
-const SortSelector = ({ onSelect }: SortSelectorProps) => {
+const SortSelector = () => {
+  const setSortOrder = useGameQueryStore((s) => s.setSortOrder);
+
   const sortOptions = [
     { value: "", label: "Relevance" },
     { value: "name", label: "Name" },
@@ -14,7 +14,7 @@ const SortSelector = ({ onSelect }: SortSelectorProps) => {
     <select
       className="rounded-md border px-3 py-2 mb-4"
       onChange={(e) =>
-        onSelect(e.target.value === "all" ? null : e.target.value)
+        setSortOrder(e.target.value === "all" ? null : e.target.value)
       }
     >
       <option value="all">Sort By</option>

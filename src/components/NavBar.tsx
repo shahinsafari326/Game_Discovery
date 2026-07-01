@@ -2,10 +2,9 @@ import SearchBox from "./SearchBox";
 
 type NavbarProps = {
   logoSrc: string;
-  onSearch: (searchText: string) => void;
 };
 
-function NavBar({ logoSrc, onSearch }: NavbarProps) {
+function NavBar({ logoSrc }: NavbarProps) {
   return (
     <nav className="flex h-21 items-center bg-zinc-900 px-4 text-white">
       <img
@@ -15,7 +14,7 @@ function NavBar({ logoSrc, onSearch }: NavbarProps) {
       />
 
       <div className="mx-4 flex-1">
-        <SearchBox onSearch={onSearch} />
+        <SearchBox />
       </div>
 
       <span className="text-xl font-extrabold">Game Discover</span>

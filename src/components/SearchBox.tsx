@@ -1,18 +1,17 @@
 import { useRef } from "react";
 import { FaSearch } from "react-icons/fa";
+import useGameQueryStore from "../contexts/useGameQueryStore";
 
-interface SearchBoxProps {
-  onSearch: (searchText: string) => void;
-}
+const SearchBox = () => {
+  const setSearchText = useGameQueryStore((s) => s.setSearchText);
 
-const SearchBox = ({ onSearch }: SearchBoxProps) => {
   const ref = useRef<HTMLInputElement>(null);
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault(); // dont submit the form to server
         if (ref.current) {
-          onSearch(ref.current.value);
+          setSearchText(ref.current.value);
         }
       }}
       className="relative flex-1"

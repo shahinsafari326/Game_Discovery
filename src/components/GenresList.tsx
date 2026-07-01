@@ -1,12 +1,11 @@
+import useGameQueryStore from "../contexts/useGameQueryStore";
 import useGenres from "../hooks/useGenre";
 import { Spinner } from "./Spinner";
 
-interface GenreListProps {
-  onSelectGenre: (genreId: number) => void;
-  selectedGenreId?: number | null;
-}
+const GenresList = () => {
+  const setGenreId = useGameQueryStore((s) => s.setGenreId);
+  const selectedGenreId = useGameQueryStore((s) => s.gameQuery.genreId);
 
-const GenresList = ({ onSelectGenre, selectedGenreId }: GenreListProps) => {
   const { data, isLoading } = useGenres();
   if (isLoading) return <Spinner />;
   const genres = data?.results;
@@ -23,7 +22,7 @@ const GenresList = ({ onSelectGenre, selectedGenreId }: GenreListProps) => {
             />
 
             <button
-              onClick={() => onSelectGenre(genre.id)}
+              onClick={() => setGenreId(genre.id)}
               className={`text-grey-600 hover:underline ${selectedGenreId === genre.id ? "font-bold" : ""}`}
             >
               {genre.name}
